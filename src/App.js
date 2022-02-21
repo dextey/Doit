@@ -1,23 +1,16 @@
 import Navbar from "./Components/Navbar";
-import Task from "./Components/Task";
-
+import {Routes,Route} from 'react-router-dom'
+import HomePage from "./Pages/HomePage";
+import TaskPage from "./Pages/TaskPage";
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="pt-3">
-        <div className="flex flex-col pt-16  ">
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-          <Task />
-        </div>
-      </div>
+      <Routes>
+        <Route  path="/" element={<HomePage/>} />
+        <Route path="/add" element={<TaskPage/>} />
+      </Routes>
+      
     </div>
   );
 }
