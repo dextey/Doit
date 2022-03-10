@@ -9,8 +9,8 @@ function Task({ task }) {
         <span className="text-md font-light font-mono">{task.date}</span>
       </div>
       <div className="m-4">
-        <span>
-          <img src={check} className="h-6" alt="" />
+        <span className="">
+          <img src={check} className="h-6 opacity-60" alt="" />
         </span>
       </div>
     </div>
