@@ -1,10 +1,21 @@
+import fire from "../icons/fire-solid.svg";
+import circle from "../icons/circle-notch-solid.svg";
+import branch from "../icons/code-branch-solid.svg";
+
 function Navbar() {
   return (
-    <div className="flex justify-between bg-slate-600 items-center fixed w-full">
-      <div className="m-3">
-        <span className="font-extrabold logo text-white text-3xl">Do!t</span>
+    <div className="flex w-full  p-4 absolute bottom-0">
+      <div className="flex p-4 justify-around bg-[#252F40] rounded-[20px] w-full items-center  ">
+        <span>
+          <img src={branch} className="h-10" alt="" />
+        </span>
+        <span>
+          <img src={fire} className="h-10" alt="" />
+        </span>
+        <span>
+          <img src={circle} className="h-10" alt="" />
+        </span>
       </div>
-      <div className="mx-5 m-2"></div>
     </div>
   );
 }

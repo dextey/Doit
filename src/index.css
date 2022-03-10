@@ -5,14 +5,6 @@
 @tailwind utilities;
 
 body {
-  background-color: rgb(46, 64, 92);
-}
-
-.logo {
-  font-family: "Luckiest Guy", cursive;
-  font-family: "Mochiy Pop P One", sans-serif;
-}
-
-.task {
+  background-color: #1c1b2b;
   font-family: "Poppins", sans-serif;
 }
