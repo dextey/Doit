@@ -30,9 +30,11 @@ function TaskPage({ tasks }) {
       <div className="flex mx-6 m-4 p-2 justify-between items-center">
         <div className="flex gap-10 items-center">
           <Link to="/">
-            <img src={left} alt="" className="h-8 " />
+            <img src={left} alt="" className="h-5 " />
           </Link>
-          <span className="font-semibold text-2xl"> New &lt;/Function&gt;</span>
+          <span className="font-semibold text-1xl font-mono">
+            Finish what you start
+          </span>
         </div>
         {tasks && (
           <span
@@ -114,7 +116,7 @@ const Form = ({ updatetask }) => {
         )}
         <div className="my-2 px-4   rounded-md bg-transparent">
           <input
-            className="my-2 p-1 w-full bg-transparent text-[1.4rem] text-white outline-none placeholder-slate-400"
+            className="my-2 p-1 w-full bg-transparent text-[.9rem] text-white outline-none placeholder-slate-400"
             type="time"
             defaultValue={updatetask ? updatetask.time : null}
             onChange={(e) => {
@@ -122,11 +124,11 @@ const Form = ({ updatetask }) => {
             }}
           />
         </div>
-        <hr className="mb-10" />
+        <hr className="mb-6" />
         <div className="flex flex-col pb-72">
           <div className="my-2 px-4   rounded-md bg-[#6a7e8f77]">
             <input
-              className="my-3 p-2 w-full  bg-transparent text-[1.2rem] text-white outline-none placeholder-slate-400"
+              className="my-1 p-2 w-full  bg-transparent text-[.86rem] text-white outline-none placeholder-slate-400"
               type="text"
               defaultValue={updatetask ? updatetask.task : null}
               placeholder="todays mission!"
@@ -138,7 +140,7 @@ const Form = ({ updatetask }) => {
 
           <div className="my-2 px-4   rounded-md bg-[#6a7e8f77]">
             <input
-              className="my-3 p-2 w-full bg-transparent text-[1.2rem] text-white outline-none placeholder-slate-400"
+              className="my-1 p-2 w-full bg-transparent text-[.86rem] text-white outline-none placeholder-slate-400"
               type="text"
               defaultValue={updatetask ? updatetask.desc : null}
               placeholder="tell me more"
