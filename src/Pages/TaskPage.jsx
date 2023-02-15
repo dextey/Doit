@@ -2,14 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import left from "../icons/angle-left-solid.svg";
 import trash from "../icons/trash-solid.svg";
-import { db } from "../firebaseConfig";
-import {
-  collection,
-  setDoc,
-  doc,
-  deleteDoc,
-  updateDoc,
-} from "@firebase/firestore";
 
 function TaskPage({ tasks }) {
   const id = localStorage.getItem("id");
@@ -21,8 +13,8 @@ function TaskPage({ tasks }) {
   console.log(task[0]);
 
   const deleteTask = async (id) => {
-    await deleteDoc(doc(db, "tasks", id));
-    window.location = "/";
+    console.log(id);
+    // window.location = "/";
   };
 
   return (
@@ -78,9 +70,6 @@ const Form = ({ updatetask }) => {
         time: time,
         done: done,
       };
-
-      const result = await setDoc(doc(collection(db, "tasks")), newTask);
-      window.location = "/";
     }
   };
 
@@ -98,11 +87,7 @@ const Form = ({ updatetask }) => {
         done: done,
       };
 
-      const result = await updateDoc(doc(db, "tasks", id), newTask);
-      console.log("====================================");
-      console.log(result);
-      console.log("====================================");
-      window.location = "/";
+      console.log(newTask);
     }
   };
 

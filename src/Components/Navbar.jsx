@@ -4,8 +4,8 @@ import branch from "../icons/code-branch-solid.svg";
 
 function Navbar() {
   return (
-    <div className="flex w-screen px-4 py-1 absolute ">
-      <div className="flex p-3 justify-around bg-[#252F40] rounded-[14px] w-full items-center  ">
+    <div className="flex w-full justify-center">
+      <div className="flex p-3 justify-around bg-[#252F40] rounded-[14px] w-11/12 items-center absolute bottom-[1rem] ">
         <span>
           <img src={branch} className="h-6" alt="" />
         </span>

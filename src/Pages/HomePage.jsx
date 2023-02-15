@@ -6,11 +6,9 @@ import plus from "../icons/plus-solid.svg";
 import { Link } from "react-router-dom";
 
 function HomePage({ Tasks }) {
-  localStorage.clear();
-
   return (
-    <div>
-      <div className="flex justify-between">
+    <div className="container mx-auto  h-screen ">
+      <div className="flex justify-between ">
         <div></div>
         <div className="flex rounded-full items-center pl-7   p-2 m-2 bg-[#236966] bg-opacity-30">
           <span className="font-bold text-[.8rem] px-2">Dexter</span>
@@ -28,7 +26,9 @@ function HomePage({ Tasks }) {
           return <Task key={task.id} task={task} />;
         })}
       </div>
-      <Navbar />
+      <div>
+        <Navbar />
+      </div>
     </div>
   );
 }
