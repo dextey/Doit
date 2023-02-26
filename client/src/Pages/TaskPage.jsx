@@ -1,25 +1,22 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useTasks } from "../Context/store";
 import left from "../icons/angle-left-solid.svg";
 import trash from "../icons/trash-solid.svg";
 
-function TaskPage({ tasks }) {
+function TaskPage() {
+  const { state, dispatch } = useTasks();
   const id = localStorage.getItem("id");
-  console.log(tasks);
-  let task = [0];
-  if (tasks) {
-    task = tasks.filter((task) => task.id === id);
-  }
-  console.log(task[0]);
-
-  const deleteTask = async (id) => {
+  const task = id && state[id].data;
+  console.log(task);
+  const deleteTask = (id) => {
     console.log(id);
-    // window.location = "/";
   };
 
   return (
-    <div>
-      <div className="flex mx-6 m-4 p-2 justify-between items-center">
+    <div className="flex flex-col h-screen">
+      <div className="flex mx-6 py-10 p-2 justify-between items-center">
         <div className="flex gap-10 items-center">
           <Link to="/">
             <img src={left} alt="" className="h-5 " />
@@ -28,10 +25,10 @@ function TaskPage({ tasks }) {
             Finish what you start
           </span>
         </div>
-        {tasks && (
+        {task && (
           <span
             onClick={() => {
-              deleteTask(task[0].id);
+              deleteTask(task.id);
             }}
           >
             <img src={trash} alt="" className="h-5 opacity-40" />
@@ -39,8 +36,8 @@ function TaskPage({ tasks }) {
         )}
       </div>
 
-      <div className=" flex flex-col  rounded-md m-4 p-1 bg-[#4A6E78] bg-opacity-30 ">
-        <Form updatetask={task[0]} />
+      <div className=" flex flex-col flex-grow  rounded-md mx-4 p-1  ">
+        <Form updatetask={task} dispatch={dispatch} />
       </div>
     </div>
   );
@@ -48,9 +45,8 @@ function TaskPage({ tasks }) {
 
 export default TaskPage;
 
-// const Form = ({ setTask ,setDesc,setTime }) => {
-const Form = ({ updatetask }) => {
-  // console.log(updatetask && 1);
+const Form = ({ updatetask, dispatch }) => {
+  const navigate = useNavigate();
 
   const [task, setTask] = useState(updatetask ? updatetask.task : null);
   const [desc, setDesc] = useState(updatetask ? updatetask.desc : null);
@@ -59,7 +55,6 @@ const Form = ({ updatetask }) => {
   const [error, setError] = useState(false);
 
   const addTask = async () => {
-    console.log("adding task");
     if (!task || !desc || !time) {
       setError(!error);
     } else {
@@ -70,6 +65,19 @@ const Form = ({ updatetask }) => {
         time: time,
         done: done,
       };
+      axios
+        .post("http://localhost:4000/tasks", { data: newTask })
+        .then((res) => {
+          if (res.status === 201) {
+            dispatch({
+              type: "ADD_TASK",
+              payload: { [res.data.id]: res.data },
+            });
+          }
+        })
+        .then(() => {
+          navigate("/");
+        });
     }
   };
 
@@ -86,13 +94,11 @@ const Form = ({ updatetask }) => {
         time: time,
         done: done,
       };
-
-      console.log(newTask);
     }
   };
 
   return (
-    <>
+    <div className="bg-[#282c3f] h-full my-5  bg-opacity-30 rounded-lg">
       <div className="flex m-4 flex-col ">
         {error && (
           <div className="text-red-600 bg-red-300 rounded-lg m-3 p-2 px-4">
@@ -150,6 +156,6 @@ const Form = ({ updatetask }) => {
           {updatetask ? "Update" : "Add"}
         </button>
       </div>
-    </>
+    </div>
   );
 };

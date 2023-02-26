@@ -4,10 +4,13 @@ import Navbar from "../Components/Navbar";
 
 import plus from "../icons/plus-solid.svg";
 import { Link } from "react-router-dom";
+import { useTasks } from "../Context/store";
 
-function HomePage({ Tasks }) {
+function HomePage() {
+  const Tasks = useTasks().state;
+
   return (
-    <div className="container mx-auto  h-screen ">
+    <div className="container flex flex-col mx-auto  h-screen ">
       <div className="flex justify-between ">
         <div></div>
         <div className="flex rounded-full items-center pl-7   p-2 m-2 bg-[#236966] bg-opacity-30">
@@ -21,12 +24,14 @@ function HomePage({ Tasks }) {
           <img src={plus} className="h-4" alt="" />
         </Link>
       </div>
-      <div className="flex flex-col overflow-y-auto  h-[500px] ">
-        {Tasks.map((task) => {
-          return <Task key={task.id} task={task} />;
-        })}
+      <div className="flex-grow   overflow-y-auto  ">
+        <div className="flex flex-col ">
+          {Object.keys(Tasks).map((id) => {
+            return <Task key={id} task={Tasks[id]} />;
+          })}
+        </div>
       </div>
-      <div>
+      <div className="flex w-full py-5">
         <Navbar />
       </div>
     </div>

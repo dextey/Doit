@@ -1,20 +1,18 @@
 import { Routes, Route } from "react-router-dom";
+import { TaskProvider } from "./Context/store";
 import HomePage from "./Pages/HomePage";
 import TaskPage from "./Pages/TaskPage";
-import { useEffect, useState } from "react";
 
 function App() {
-  const [Tasks, setTasks] = useState([]);
-
-  useEffect(() => {}, []);
-
   return (
     <div className="container mx-auto">
-      <Routes>
-        <Route path="/" element={<HomePage Tasks={Tasks} />} />
-        <Route path="/add" element={<TaskPage />} />
-        <Route path="/update" element={<TaskPage tasks={Tasks} />} />
-      </Routes>
+      <TaskProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/add" element={<TaskPage />} />
+          <Route path="/update" element={<TaskPage />} />
+        </Routes>
+      </TaskProvider>
     </div>
   );
 }
