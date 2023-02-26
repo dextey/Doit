@@ -8,9 +8,9 @@ import trash from "../icons/trash-solid.svg";
 function TaskPage() {
   const { state, dispatch } = useTasks();
   const id = localStorage.getItem("id");
-  const task = id && state[id].data;
+  const task = id && state[id]?.data;
   console.log(task);
-  const deleteTask = (id) => {
+  const deleteTask = () => {
     console.log(id);
   };
 
