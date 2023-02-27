@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useTasks } from "../Context/store";
 
-function SubTasks({ id, subTasks, setSubTasks }) {
-  console.log(subTasks);
+function SubTasks({ dispatch }) {
+  const { state } = useTasks();
+  const id = localStorage.getItem("id");
+  const Task = state[id];
+
+  const [subTasks, setSubTasks] = useState(Task?.subTasks || []);
   const [subtask, setSubTask] = useState("");
   const addSubtask = () => {
     if (subtask)
@@ -12,8 +17,10 @@ function SubTasks({ id, subTasks, setSubTasks }) {
         })
         .then((res) => {
           if (res.status === 201) {
-            setSubTasks(...res.data);
-            console.log(res.data);
+            // console.log(res.data);
+            // dispatch({ type: "ADD_SUB_TASK", payload: { tid: id, subtask: res.data } });
+            setSubTasks((prevTasks) => [...prevTasks, res.data]);
+            // console.log(subTasks);
           }
         });
   };
@@ -22,10 +29,10 @@ function SubTasks({ id, subTasks, setSubTasks }) {
     <div className="flex flex-col w-full m-4 ">
       <div>
         <span>Subtasks</span>
-        {/* {subTasks.map((task) => {
-          console.log(task);
-          return <div>asdf</div>;
-        })} */}
+
+        {subTasks.map(({ subTask }) => {
+          return <div>{subTask}</div>;
+        })}
       </div>
       <div className="flex w-full ">
         <div className="flex items-center bg-blue-50 bg-opacity-20 rounded-lg w-full">
@@ -38,10 +45,7 @@ function SubTasks({ id, subTasks, setSubTasks }) {
             }}
           />
           <div className="px-5">
-            <button
-              className="bg-blue-300 font-extrabold text-2xl px-5 rounded-full"
-              onClick={addSubtask}
-            >
+            <button className="bg-blue-300 font-extrabold text-2xl px-5 rounded-full" onClick={addSubtask}>
               +
             </button>
           </div>

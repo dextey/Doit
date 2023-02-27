@@ -22,9 +22,7 @@ function TaskPage() {
           <Link to="/">
             <img src={left} alt="" className="h-5 " />
           </Link>
-          <span className="font-semibold text-1xl font-mono">
-            Finish what you start
-          </span>
+          <span className="font-semibold text-1xl font-mono">Finish what you start</span>
         </div>
         {task && (
           <span
@@ -46,15 +44,13 @@ function TaskPage() {
 
 export default TaskPage;
 
-const Form = ({ updatetask, dispatch, id }) => {
+const Form = ({ updatetask, dispatch }) => {
   const navigate = useNavigate();
 
   const [task, setTask] = useState(updatetask ? updatetask.task : null);
   const [desc, setDesc] = useState(updatetask ? updatetask.desc : null);
   const [time, setTime] = useState(updatetask ? updatetask.time : null);
-  const [subTasks, setSubTasks] = useState(
-    updatetask ? updatetask.subTasks : []
-  );
+  const [subTasks, setSubTasks] = useState(updatetask ? updatetask.subTasks : []);
   const [done, setDone] = useState(updatetask ? updatetask.done : false);
   const [error, setError] = useState(false);
 
@@ -107,9 +103,7 @@ const Form = ({ updatetask, dispatch, id }) => {
     <div className="bg-[#282c3f] flex flex-col h-full my-5  bg-opacity-30 rounded-lg">
       <div className="flex m-4 px-7 flex-col ">
         {error && (
-          <div className="text-red-600 bg-red-300 rounded-lg m-3 p-2 px-4">
-            *please fill all the fields
-          </div>
+          <div className="text-red-600 bg-red-300 rounded-lg m-3 p-2 px-4">*please fill all the fields</div>
         )}
         <div className="my-2 px-4   rounded-md bg-transparent">
           <input
@@ -148,7 +142,7 @@ const Form = ({ updatetask, dispatch, id }) => {
           </div>
         </div>
         <hr />
-        <SubTasks id={id} subTasks={subTasks} setSubTasks={setSubTasks} />
+        <SubTasks dispatch={dispatch} />
       </div>
       <div className="flex mt-auto">
         <button
