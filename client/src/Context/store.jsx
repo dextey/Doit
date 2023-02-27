@@ -1,11 +1,5 @@
 import axios from "axios";
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 
 export const TaskContext = createContext({});
 
@@ -16,6 +10,11 @@ export function TasksData() {
         return { ...state, ...action.payload };
       case "ADD_TASK":
         return { ...state, ...action.payload };
+      case "ADD_SUB_TASK":
+        const { tid, subtask } = action.payload;
+        state[tid]?.subTasks.push(subtask);
+        console.log("hai");
+        return { ...state };
       default:
         break;
     }
@@ -24,7 +23,7 @@ export function TasksData() {
   const [state, dispatch] = useReducer(updateData, {});
 
   useEffect(() => {
-    axios.get("http://localhost:4000/tasks").then((res) => {
+    axios.get("http://localhost:4002/").then((res) => {
       dispatch({ type: "LOAD_TASK", payload: res.data });
     });
   }, []);
