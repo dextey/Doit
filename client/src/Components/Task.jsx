@@ -1,8 +1,8 @@
 import check from "../icons/circle-check-solid.svg";
 import { useNavigate } from "react-router";
 
-function Task({ task }) {
-  const { data, id } = task;
+function Task({ data }) {
+  const { task, desc, time, id } = data;
 
   const navigate = useNavigate();
   const handleClick = (id) => {
@@ -16,9 +16,9 @@ function Task({ task }) {
         onClick={() => handleClick(id)}
         on
       >
-        <h2 className="text-sm task font-semibold">{data.task}</h2>
-        <span className="text-xs font-light font-mono">{data.desc}</span>
-        <span className="text-xs font-light font-mono mt-2">{data.time}</span>
+        <h2 className="text-sm task font-semibold">{task}</h2>
+        <span className="text-xs font-light font-mono">{desc}</span>
+        <span className="text-xs font-light font-mono mt-2">{time}</span>
       </div>
       <div className="m-4">
         <span className="">

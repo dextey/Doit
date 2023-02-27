@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import SubTasks from "../Components/SubTasks";
 import { useTasks } from "../Context/store";
 import left from "../icons/angle-left-solid.svg";
 import trash from "../icons/trash-solid.svg";
@@ -8,8 +9,8 @@ import trash from "../icons/trash-solid.svg";
 function TaskPage() {
   const { state, dispatch } = useTasks();
   const id = localStorage.getItem("id");
-  const task = id && state[id]?.data;
-  console.log(task);
+  const task = id && state[id];
+
   const deleteTask = () => {
     console.log(id);
   };
@@ -37,7 +38,7 @@ function TaskPage() {
       </div>
 
       <div className=" flex flex-col flex-grow  rounded-md mx-4 p-1  ">
-        <Form updatetask={task} dispatch={dispatch} />
+        <Form updatetask={task} dispatch={dispatch} id={id} />
       </div>
     </div>
   );
@@ -45,12 +46,15 @@ function TaskPage() {
 
 export default TaskPage;
 
-const Form = ({ updatetask, dispatch }) => {
+const Form = ({ updatetask, dispatch, id }) => {
   const navigate = useNavigate();
 
   const [task, setTask] = useState(updatetask ? updatetask.task : null);
   const [desc, setDesc] = useState(updatetask ? updatetask.desc : null);
   const [time, setTime] = useState(updatetask ? updatetask.time : null);
+  const [subTasks, setSubTasks] = useState(
+    updatetask ? updatetask.subTasks : []
+  );
   const [done, setDone] = useState(updatetask ? updatetask.done : false);
   const [error, setError] = useState(false);
 
@@ -63,6 +67,7 @@ const Form = ({ updatetask, dispatch }) => {
         task: task,
         desc: desc,
         time: time,
+        subTasks: subTasks,
         done: done,
       };
       axios
@@ -92,14 +97,15 @@ const Form = ({ updatetask, dispatch }) => {
         task: task,
         desc: desc,
         time: time,
+        subTasks: subTasks,
         done: done,
       };
     }
   };
 
   return (
-    <div className="bg-[#282c3f] h-full my-5  bg-opacity-30 rounded-lg">
-      <div className="flex m-4 flex-col ">
+    <div className="bg-[#282c3f] flex flex-col h-full my-5  bg-opacity-30 rounded-lg">
+      <div className="flex m-4 px-7 flex-col ">
         {error && (
           <div className="text-red-600 bg-red-300 rounded-lg m-3 p-2 px-4">
             *please fill all the fields
@@ -116,7 +122,7 @@ const Form = ({ updatetask, dispatch }) => {
           />
         </div>
         <hr className="mb-6" />
-        <div className="flex flex-col pb-72">
+        <div className="flex flex-col pb-5">
           <div className="my-2 px-4   rounded-md bg-[#6a7e8f77]">
             <input
               className="my-1 p-2 w-full  bg-transparent text-[.86rem] text-white outline-none placeholder-slate-400"
@@ -141,6 +147,8 @@ const Form = ({ updatetask, dispatch }) => {
             />
           </div>
         </div>
+        <hr />
+        <SubTasks id={id} subTasks={subTasks} setSubTasks={setSubTasks} />
       </div>
       <div className="flex mt-auto">
         <button

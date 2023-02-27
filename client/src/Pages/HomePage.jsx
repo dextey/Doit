@@ -27,7 +27,7 @@ function HomePage() {
       <div className="flex-grow   overflow-y-auto  ">
         <div className="flex flex-col ">
           {Object.keys(Tasks).map((id) => {
-            return <Task key={id} task={Tasks[id]} />;
+            return <Task key={id} data={Tasks[id]} />;
           })}
         </div>
       </div>
