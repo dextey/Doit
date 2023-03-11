@@ -24,7 +24,7 @@ app.post("/events", (req, res) => {
     tasks[tid]?.subTasks.push(data);
   }
 
-  console.log(tasks);
+  // console.log(tasks);
   res.send({});
 });
 
