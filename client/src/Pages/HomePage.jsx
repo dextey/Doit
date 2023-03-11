@@ -8,6 +8,7 @@ import { useTasks } from "../Context/store";
 
 function HomePage() {
   const Tasks = useTasks().state;
+  localStorage.removeItem("id");
 
   return (
     <div className="container flex flex-col mx-auto  h-screen ">

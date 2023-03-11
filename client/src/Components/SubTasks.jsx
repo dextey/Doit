@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useTasks } from "../Context/store";
 
-function SubTasks({ dispatch }) {
+function SubTasks() {
   const { state } = useTasks();
   const id = localStorage.getItem("id");
-  const Task = state[id];
-
-  const [subTasks, setSubTasks] = useState(Task?.subTasks || []);
+  const [subTasks, setSubTasks] = useState([]);
   const [subtask, setSubTask] = useState("");
+
+  useEffect(() => {
+    if (state[id]) {
+      setSubTasks(state[id].subTasks);
+    }
+  }, [state]);
+
+  const alreadyAdded = (task) => {
+    return !!subTasks.find(({ subTask }) => subTask === task);
+  };
+
+  alreadyAdded(subtask);
+
   const addSubtask = () => {
-    if (subtask)
+    if (subtask && !alreadyAdded(subtask))
       axios
         .post(`http://localhost:4001/tasks/${id}/subtasks`, {
           subTask: subtask,
@@ -30,9 +41,11 @@ function SubTasks({ dispatch }) {
       <div>
         <span>Subtasks</span>
 
-        {subTasks.map(({ subTask }) => {
-          return <div>{subTask}</div>;
-        })}
+        {!subTasks.lenght &&
+          subTasks.map(({ stid, subTask }) => {
+            // console.log(task);
+            return <div key={stid}>{subTask}</div>;
+          })}
       </div>
       <div className="flex w-full ">
         <div className="flex items-center bg-blue-50 bg-opacity-20 rounded-lg w-full">

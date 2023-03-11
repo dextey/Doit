@@ -142,7 +142,7 @@ const Form = ({ updatetask, dispatch }) => {
           </div>
         </div>
         <hr />
-        <SubTasks dispatch={dispatch} />
+        <SubTasks />
       </div>
       <div className="flex mt-auto">
         <button
