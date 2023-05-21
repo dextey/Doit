@@ -15,3 +15,18 @@ spec:
       containers:
         - name: tasks
           image: doit/tasks:0.0.1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-cl-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: tasks
+  ports:
+    - name: tasks
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
