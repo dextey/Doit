@@ -24,7 +24,7 @@ app.post("/tasks/:id/subtasks", async (req, res) => {
   subtasksByTaskId[tid] = subtasks;
 
   await axios
-    .post("http://localhost:4005/events", {
+    .post("http://events-srv:4005/events", {
       type: "SUB_TASK_CREATED",
       data: { stid, subTask, status: false, tid },
     })

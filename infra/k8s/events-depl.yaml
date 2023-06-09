@@ -15,7 +15,6 @@ spec:
       containers:
         - name: events
           image: doit/events:0.0.1
-          imagePullPolicy: Never
 
 ---
 apiVersion: v1

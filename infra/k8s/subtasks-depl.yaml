@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subtasks-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: subtasks
+  template:
+    metadata:
+      labels:
+        app: subtasks
+    spec:
+      containers:
+        - name: subtasks
+          image: doit/subtasks:0.0.1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: subtasks-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: subtasks
+  ports:
+    - name: subtasks
+      protocol: TCP
+      port: 4001
+      targetPort: 4001
