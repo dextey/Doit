@@ -10,7 +10,7 @@ app.use(express.json());
 app.post("/events", (req, res) => {
   const events = req.body;
   console.log(events.type);
-  axios.post("http://localhost:4000/events", events).catch((err) => console.log("Tasks service Down"));
+  axios.post("http://task-cl-srv:4000/events", events).catch((err) => console.log("Tasks service Down"));
   axios.post("http://localhost:4001/events", events).catch((err) => console.log("Sub-Task service Down"));
   axios.post("http://localhost:4002/events", events).catch((err) => console.log("Query service Down"));
 

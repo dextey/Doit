@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: event-depl
+  name: events-depl
 spec:
   replicas: 1
   selector:
@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: events
-          image: doit/tasks:0.0.1
+          image: doit/events:0.0.1
+          imagePullPolicy: Never
 
 ---
 apiVersion: v1
@@ -24,7 +25,7 @@ metadata:
 spec:
   type: ClusterIP # default service type is cluster Ip for type in Servive
   selector:
-    app: events
+    app: events # map pod with label events
   ports:
     - name: events
       protocol: TCP

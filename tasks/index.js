@@ -18,7 +18,8 @@ app.post("/tasks", (req, res) => {
   const id = randomBytes(7).toString("hex");
   tasks[id] = { id: id, ...task };
 
-  axios.post("http://localhost:4005/events", { type: "TASK_CREATED", data: tasks[id] }).catch((err) => {
+  // axios.post("http://localhost:4005/events", { type: "TASK_CREATED", data: tasks[id] }).catch((err) => {
+  axios.post("http://events-srv:4005/events", { type: "TASK_CREATED", data: tasks[id] }).catch((err) => {
     console.log("Event service  down");
   });
 
