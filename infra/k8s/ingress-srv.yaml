@@ -4,6 +4,7 @@ metadata:
   name: ingress-srv
   annotations:
     kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
     - host: doit.io
@@ -16,3 +17,24 @@ spec:
                 name: query-srv
                 port:
                   number: 4002
+          - path: /tasks/create
+            pathType: Prefix
+            backend:
+              service:
+                name: task-cl-srv
+                port:
+                  number: 4000
+          - path: /tasks/?(.*)/comments
+            pathType: Prefix
+            backend:
+              service:
+                name: subtasks-srv
+                port:
+                  number: 4001
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: client-srv
+                port:
+                  number: 3000

@@ -22,7 +22,7 @@ export function TasksData() {
   const [state, dispatch] = useReducer(updateData, {});
 
   useEffect(() => {
-    axios.get("http://localhost:4002/").then((res) => {
+    axios.get("http://doit.io/tasks").then((res) => {
       dispatch({ type: "ADD_TASK", payload: res.data });
     });
   }, []);

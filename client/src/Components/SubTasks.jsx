@@ -23,7 +23,7 @@ function SubTasks() {
   const addSubtask = () => {
     if (subtask && !alreadyAdded(subtask))
       axios
-        .post(`http://localhost:4001/tasks/${id}/subtasks`, {
+        .post(`http://doit.io/tasks/${id}/subtasks`, {
           subTask: subtask,
         })
         .then((res) => {
