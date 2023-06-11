@@ -28,7 +28,7 @@ app.post("/events", (req, res) => {
   res.send({});
 });
 
-app.get("/", (req, res) => {
+app.get("/tasks", (req, res) => {
   res.json(tasks);
 });
 

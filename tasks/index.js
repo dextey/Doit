@@ -12,7 +12,7 @@ app.use(express.json());
 
 const tasks = {};
 
-app.post("/tasks", (req, res) => {
+app.post("/tasks/create", (req, res) => {
   const task = req.body.data;
 
   const id = randomBytes(7).toString("hex");
