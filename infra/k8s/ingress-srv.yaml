@@ -24,7 +24,7 @@ spec:
                 name: task-cl-srv
                 port:
                   number: 4000
-          - path: /tasks/?(.*)/comments
+          - path: /tasks/?(.*)/subtasks
             pathType: Prefix
             backend:
               service:
