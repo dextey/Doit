@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tasks
-          image: doit/tasks:0.0.1
+          image: dextey/tasks
 
 ---
 apiVersion: v1

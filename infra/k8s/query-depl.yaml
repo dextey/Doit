@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: query
-          image: doit/query:0.0.1
+          image: dextey/query
 
 ---
 apiVersion: v1

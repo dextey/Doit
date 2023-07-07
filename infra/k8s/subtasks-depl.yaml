@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: subtasks
-          image: doit/subtasks:0.0.1
+          image: dextey/subtasks
 
 ---
 apiVersion: v1

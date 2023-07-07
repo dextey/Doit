@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: doit:0.0.1
+          image: dextey/doit
 
 ---
 apiVersion: v1
