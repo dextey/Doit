@@ -4,7 +4,7 @@ import { status_list } from "./Constants";
 
 function Container() {
   const initialTasks = [
-    { name: "Kaban task manager", status: status_list.inprogress, timeline: "14 July 24" },
+    { name: "Kanban task manager", status: status_list.inprogress, timeline: "14 July 24" },
     { name: "Linear algebra in ML", status: status_list.inprogress, timeline: "14 July 24" },
     { name: "Algo - fix placement", status: status_list.tasks, timeline: "18 July 24" },
     { name: "Fix Table in POS ", status: status_list.onhold, timeline: "24 July 24" },

@@ -17,7 +17,7 @@ function Task({ tasks }: TaskProps) {
     return (
       <div
         key={index}
-        className="flex cursor-grab text-sm  "
+        className="flex cursor-grab text-md "
         draggable
         onDragStart={(e) => onDrag(e, task.name)}
       >
